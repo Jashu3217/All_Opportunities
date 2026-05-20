@@ -1,0 +1,12 @@
+# Railway deployment config
+[build]
+  builder = "nixpacks"
+  buildCommand = "cd backend && npm install && npm run build"
+
+[deploy]
+  startCommand = "cd backend && npm start"
+  restartPolicyType = "on-failure"
+  restartPolicyMaxRetries = 3
+
+[[services]]
+  name = "opportunityos-api"
