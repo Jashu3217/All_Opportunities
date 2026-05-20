@@ -1,0 +1,51 @@
+/* ── Global reset & design tokens ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #040d1a;
+  --bg2:       #071428;
+  --bg3:       #0a1c38;
+  --border:    #1a3560;
+  --border2:   #2a4f80;
+  --cyan:      #00d4ff;
+  --green:     #00e676;
+  --amber:     #ffb800;
+  --purple:    #7c4dff;
+  --pink:      #ff4081;
+  --text:      #e8f4ff;
+  --text2:     #8aafd4;
+  --text3:     #4a7098;
+  --mono:      'Space Mono', monospace;
+  --sans:      'Outfit', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+
+/* ── Links ─────────────────────────────────────────────────────────────────── */
+a { color: var(--cyan); text-decoration: none; }
+a:hover { opacity: 0.85; }
+
+/* ── Utilities ─────────────────────────────────────────────────────────────── */
+.fade-in { animation: fadeUp 0.4s ease both; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+@keyframes pulse  { 0%,100%{opacity:1} 50%{opacity:0.3} }
+@keyframes spin   { to{transform:rotate(360deg)} }
+@keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+
+/* ── Mono text ─────────────────────────────────────────────────────────────── */
+.mono { font-family: var(--mono); }
+
+/* ── Material overrides ────────────────────────────────────────────────────── */
+.mat-mdc-button { font-family: var(--sans) !important; }

@@ -1,0 +1,53 @@
+version: '3.9'
+
+services:
+  # ── MongoDB ────────────────────────────────────────────────────────────────
+  mongo:
+    image: mongo:7
+    container_name: opportunityos-mongo
+    restart: unless-stopped
+    ports: ['27017:27017']
+    volumes: ['mongo_data:/data/db']
+    environment:
+      MONGO_INITDB_DATABASE: opportunityos
+
+  # ── Redis ──────────────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: opportunityos-redis
+    restart: unless-stopped
+    ports: ['6379:6379']
+    command: redis-server --appendonly yes
+    volumes: ['redis_data:/data']
+
+  # ── Backend API ────────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: opportunityos-api
+    restart: unless-stopped
+    ports: ['3000:3000']
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      MONGODB_URI: mongodb://mongo:27017/opportunityos
+      REDIS_URL: redis://redis:6379
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      CLIENT_ORIGIN: http://localhost:4200
+    depends_on: [mongo, redis]
+    volumes: ['./backend/src:/app/src']
+
+  # ── Angular Frontend ───────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: opportunityos-web
+    restart: unless-stopped
+    ports: ['4200:80']
+    depends_on: [backend]
+
+volumes:
+  mongo_data:
+  redis_data:
