@@ -1,4 +1,3 @@
-# Build stage — install all deps (including devDependencies) and compile TypeScript
 FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
