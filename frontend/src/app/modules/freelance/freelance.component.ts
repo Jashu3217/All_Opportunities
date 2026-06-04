@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../core/services/api.service';
 import { FreelanceOpportunity } from '../../core/models';
@@ -121,7 +121,7 @@ export class FreelanceComponent implements OnInit {
   SKILL_COLORS: Record<string,string> = { 'Node.js':'#68a063','TypeScript':'#3178c6','Redis':'#dc382d','MongoDB':'#47a248','AWS':'#ff9900','Docker':'#2496ed','Microservices':'#6366f1','Angular':'#dd0031','Express.js':'#68a063','PostgreSQL':'#336791','React':'#61dafb' };
   getSkillColor(s: string): string { return this.SKILL_COLORS[s] || '#8aafd4'; }
 
-  constructor(private api: ApiService) {}
+  private api = inject(ApiService);
   ngOnInit() { this.load(); }
   load() {
     this.loading.set(true); this.error.set(null);

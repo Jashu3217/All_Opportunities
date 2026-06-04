@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, computed } from '@angular/core';
+import { Component, OnInit, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../core/services/api.service';
@@ -171,7 +171,8 @@ export class SdeComponent implements OnInit {
     })
   );
 
-  constructor(private api: ApiService, public state: AppStateService) {}
+  private api = inject(ApiService);
+  public state = inject(AppStateService);
 
   ngOnInit() { this.load(); }
 

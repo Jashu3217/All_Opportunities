@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../core/services/api.service';
 import { GovtJobResult, GovtFetchedData } from '../../core/models';
@@ -77,7 +77,7 @@ import { GovtJobResult, GovtFetchedData } from '../../core/models';
           </div>
           <div class="profile-score" *ngIf="org.fetched?.profileMatch">
             <div class="score-bar-track">
-              <div class="score-bar-fill" [style.width]="(org.fetched.profileMatch?.score ?? 0) + '%'"></div>
+              <div class="score-bar-fill" [style.width]="(org.fetched?.profileMatch?.score ?? 0) + '%'"></div>
             </div>
             <span class="score-val">{{ org.fetched?.profileMatch?.score }}%</span>
           </div>
@@ -148,9 +148,9 @@ import { GovtJobResult, GovtFetchedData } from '../../core/models';
 
               <div *ngIf="f.profileMatch" class="detail-section">
                 <div class="detail-section-title" style="color:#00e676">PROFILE MATCH — JASWANTH</div>
-                <div style="margin-bottom:6px">{{ f.profileMatch.reason }}</div>
-                <div *ngFor="let a of f.profileMatch.advantages" class="advantage-row">✓ {{ a }}</div>
-                <div *ngFor="let g of f.profileMatch.gaps" class="gap-row">⚠ {{ g }}</div>
+                <div style="margin-bottom:6px">{{ f.profileMatch?.reason }}</div>
+                <div *ngFor="let a of f.profileMatch?.advantages" class="advantage-row">✓ {{ a }}</div>
+                <div *ngFor="let g of f.profileMatch?.gaps" class="gap-row">⚠ {{ g }}</div>
               </div>
 
               <div *ngIf="f.actionRequired" class="action-box">
@@ -248,7 +248,7 @@ export class GovtComponent implements OnInit {
   error   = signal<string | null>(null);
   logs    = signal<string[]>([]);
 
-  constructor(private api: ApiService) {}
+  private api = inject(ApiService);
 
   ngOnInit() { this.load(false); }
 

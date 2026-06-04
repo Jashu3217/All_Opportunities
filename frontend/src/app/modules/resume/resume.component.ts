@@ -1,5 +1,5 @@
 // ── Resume Component ──────────────────────────────────────────────────────────
-import { Component, OnInit, signal, computed } from '@angular/core';
+import { Component, OnInit, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../core/services/api.service';
 import { AppStateService } from '../../core/services/app-state.service';
@@ -138,7 +138,8 @@ export class ResumeComponent implements OnInit {
     });
   });
 
-  constructor(private api: ApiService, public state: AppStateService) {}
+  private api = inject(ApiService);
+  public state = inject(AppStateService);
   ngOnInit() { this.load(); }
   load() {
     this.loading.set(true); this.error.set(null);

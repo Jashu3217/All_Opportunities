@@ -1,5 +1,5 @@
 // ── Teach Component ───────────────────────────────────────────────────────────
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../core/services/api.service';
 import { TeachingOpportunity } from '../../core/models';
@@ -107,7 +107,7 @@ export class TeachComponent implements OnInit {
   error   = signal<string | null>(null);
   total   = signal(0);
 
-  constructor(private api: ApiService) {}
+  private api = inject(ApiService);
   ngOnInit() { this.load(); }
   load() {
     this.loading.set(true); this.error.set(null);
