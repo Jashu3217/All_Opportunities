@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
@@ -28,5 +28,5 @@ import { CommonModule } from '@angular/common';
   `],
 })
 export class AppComponent {
-  constructor(public state: AppStateService) {}
+  readonly state = inject(AppStateService);
 }
