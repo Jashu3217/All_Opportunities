@@ -1,27 +1,38 @@
 import { Router } from 'express';
+import multer from 'multer';
 import {
   getSdeModule, getResumeModule, getGovtModule, refreshGovtOrg,
   getTeachModule, getFreelanceModule, getHealth, getStats,
 } from '../controllers/modules.controller';
+import { uploadResume, getPersonalizedJobs } from '../controllers/resume.controller';
 
 const router = Router();
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB max
+  fileFilter: (_req, file, cb) => {
+    if (file.mimetype === 'application/pdf' || file.originalname.endsWith('.pdf')) {
+      cb(null, true);
+    } else {
+      cb(new Error('Only PDF files are allowed'));
+    }
+  },
+});
 
 // ── Health & meta ─────────────────────────────────────────────────────────────
-router.get('/health',        getHealth);
-router.get('/stats',         getStats);
+router.get('/health', getHealth);
+router.get('/stats',  getStats);
+
+// ── Resume upload & personalization ──────────────────────────────────────────
+router.post('/resume/upload',      upload.single('resume'), uploadResume);
+router.post('/resume/personalize', getPersonalizedJobs);
 
 // ── Module endpoints ──────────────────────────────────────────────────────────
-// GET /api/modules/sde?location=hyderabad
 router.get('/modules/sde',       getSdeModule);
-// GET /api/modules/resume?location=hyderabad
 router.get('/modules/resume',    getResumeModule);
-// GET /api/modules/govt?refresh=true
 router.get('/modules/govt',      getGovtModule);
-// POST /api/modules/govt/:orgId/refresh  — refresh a single org
 router.post('/modules/govt/:orgId/refresh', refreshGovtOrg);
-// GET /api/modules/teach
 router.get('/modules/teach',     getTeachModule);
-// GET /api/modules/freelance
 router.get('/modules/freelance', getFreelanceModule);
 
 export default router;
