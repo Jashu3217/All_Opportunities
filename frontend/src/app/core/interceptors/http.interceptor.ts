@@ -2,7 +2,10 @@ import { HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 
 export const httpInterceptor: HttpInterceptorFn = (req, next) => {
-  const modifiedReq = req.clone({
+  // Don't set Content-Type for file uploads — browser sets it with boundary automatically
+  const isFileUpload = req.body instanceof FormData;
+
+  const modifiedReq = isFileUpload ? req : req.clone({
     setHeaders: { 'Content-Type': 'application/json' },
   });
 
