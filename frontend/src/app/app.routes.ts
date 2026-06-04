@@ -1,19 +1,17 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'sde',
-    pathMatch: 'full',
-  },
+  { path: '', redirectTo: 'sde', pathMatch: 'full' },
   {
     path: 'sde',
-    loadComponent: () => import('./modules/sde/sde.component').then(m => m.SdeComponent),
+    loadComponent: () => import('./modules/live-jobs/live-jobs.component').then(m => m.LiveJobsComponent),
+    data: { moduleId: 'sde', title: 'SDE / SWE / SE Jobs', icon: '⚡' },
     title: 'SDE / SWE / SE Jobs — OpportunityOS',
   },
   {
     path: 'resume',
-    loadComponent: () => import('./modules/resume/resume.component').then(m => m.ResumeComponent),
+    loadComponent: () => import('./modules/live-jobs/live-jobs.component').then(m => m.LiveJobsComponent),
+    data: { moduleId: 'resume', title: 'Resume Stack Jobs', icon: '🔧' },
     title: 'Resume Stack Jobs — OpportunityOS',
   },
   {
@@ -23,16 +21,15 @@ export const routes: Routes = [
   },
   {
     path: 'teach',
-    loadComponent: () => import('./modules/teach/teach.component').then(m => m.TeachComponent),
+    loadComponent: () => import('./modules/live-jobs/live-jobs.component').then(m => m.LiveJobsComponent),
+    data: { moduleId: 'teach', title: 'DSA Teaching', icon: '🎓' },
     title: 'DSA Teaching — OpportunityOS',
   },
   {
     path: 'freelance',
-    loadComponent: () => import('./modules/freelance/freelance.component').then(m => m.FreelanceComponent),
+    loadComponent: () => import('./modules/live-jobs/live-jobs.component').then(m => m.LiveJobsComponent),
+    data: { moduleId: 'freelance', title: 'Web Freelance', icon: '🌐' },
     title: 'Web Freelance — OpportunityOS',
   },
-  {
-    path: '**',
-    redirectTo: 'sde',
-  },
+  { path: '**', redirectTo: 'sde' },
 ];

@@ -5,11 +5,14 @@ import {
   getTeachModule, getFreelanceModule, getHealth, getStats,
 } from '../controllers/modules.controller';
 import { uploadResume, getPersonalizedJobs } from '../controllers/resume.controller';
+import {
+  scanModule, tailorCVForJob, generateCoverLetterForJob, generateInterviewPrepForJob,
+} from '../controllers/scanner.controller';
 
 const router = Router();
 const upload = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB max
+  limits: { fileSize: 10 * 1024 * 1024 },
   fileFilter: (_req, file, cb) => {
     if (file.mimetype === 'application/pdf' || file.originalname.endsWith('.pdf')) {
       cb(null, true);
@@ -27,7 +30,16 @@ router.get('/stats',  getStats);
 router.post('/resume/upload',      upload.single('resume'), uploadResume);
 router.post('/resume/personalize', getPersonalizedJobs);
 
-// ── Module endpoints ──────────────────────────────────────────────────────────
+// ── AI Live Scanner ───────────────────────────────────────────────────────────
+// GET /api/scan/:moduleId?location=hyderabad&refresh=true
+router.get('/scan/:moduleId', scanModule);
+
+// ── AI Document Generation ────────────────────────────────────────────────────
+router.post('/documents/tailor-cv',        tailorCVForJob);
+router.post('/documents/cover-letter',     generateCoverLetterForJob);
+router.post('/documents/interview-prep',   generateInterviewPrepForJob);
+
+// ── Static module endpoints (fallback when no API key) ───────────────────────
 router.get('/modules/sde',       getSdeModule);
 router.get('/modules/resume',    getResumeModule);
 router.get('/modules/govt',      getGovtModule);
