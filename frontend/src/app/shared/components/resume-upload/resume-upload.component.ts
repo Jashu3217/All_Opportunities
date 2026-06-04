@@ -1,4 +1,4 @@
-import { Component, inject, signal, output } from '@angular/core';
+import { Component, inject, signal, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
@@ -113,7 +113,7 @@ export interface ParsedProfile {
   `],
 })
 export class ResumeUploadComponent {
-  profileParsed = output<ParsedProfile>();
+  @Output() profileParsed = new EventEmitter<ParsedProfile>();
 
   private http = inject(HttpClient);
 
