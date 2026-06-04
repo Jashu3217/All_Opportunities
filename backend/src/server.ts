@@ -13,6 +13,9 @@ import { errorHandler, notFound } from './middleware/error.middleware';
 
 const app = express();
 
+// Trust Railway/Vercel proxy
+app.set('trust proxy', 1);
+
 // ── Security & utilities ──────────────────────────────────────────────────────
 app.use(helmet());
 app.use(compression());
