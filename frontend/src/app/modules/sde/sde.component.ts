@@ -65,8 +65,8 @@ import { ResumeUploadComponent, ParsedProfile } from '../../shared/components/re
               <span class="iv-badge" [style.color]="getIvColor(job.interviewType)">{{ getIvIcon(job.interviewType) }} {{ job.interviewType }}</span>
             </div>
             <!-- Personalized tip -->
-            <div class="personalized-tip" *ngIf="profile() && (job as any)['personalizedTip']">
-              💡 {{ (job as any)['personalizedTip'] }}
+            <div class="personalized-tip" *ngIf="profile() && getTip(job)">
+              💡 {{ getTip(job) }}
             </div>
           </div>
           <div class="score-bar-wrap">
@@ -192,6 +192,7 @@ export class SdeComponent implements OnInit {
   getRoleColor(role: string) { return role==='SDE'?'#00d4ff':role==='SWE'?'#7c4dff':'#00e676'; }
   getIvColor(iv: string) { const m:Record<string,string>={'DSA Heavy':'#ffb800','System Design':'#7c4dff','Both DSA + SD':'#00e676','Mostly SD':'#00d4ff'}; return m[iv]||'#8aafd4'; }
   getIvIcon(iv: string) { const m:Record<string,string>={'DSA Heavy':'🧠','System Design':'🏗️','Both DSA + SD':'⚡','Mostly SD':'📐'}; return m[iv]||'💼'; }
+  getTip(job: any): string { return job['personalizedTip'] || ''; }
   getPlatformEntries(urls: Record<string,string>) {
     const L:Record<string,string>={naukri:'🔵 Naukri',linkedin:'💼 LinkedIn',indeed:'🔍 Indeed',cutshort:'✂️ Cutshort',wellfound:'🚀 Wellfound',instahyre:'⚡ Instahyre'};
     return Object.entries(urls).filter(([k])=>k in L).map(([k,u])=>({label:L[k],url:u}));
