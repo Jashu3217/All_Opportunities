@@ -50,3 +50,4 @@ a:hover { opacity: 0.85; }
 /* ── Material overrides ────────────────────────────────────────────────────── */
 .mat-mdc-button { font-family: var(--sans) !important; }
 // force redeploy Thu Jun  4 09:37:43 UTC 2026
+
