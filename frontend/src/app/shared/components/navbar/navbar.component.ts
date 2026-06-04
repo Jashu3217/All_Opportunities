@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { AppStateService } from '../../core/services/app-state.service';
-import { LOCATIONS, LocationKey } from '../../core/models';
+import { AppStateService } from '../../../core/services/app-state.service';
+import { LOCATIONS, LocationKey } from '../../../core/models';
 import { Component, inject } from '@angular/core';
 
 @Component({
