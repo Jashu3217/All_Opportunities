@@ -77,7 +77,7 @@ import { GovtJobResult, GovtFetchedData } from '../../core/models';
           </div>
           <div class="profile-score" *ngIf="org.fetched?.profileMatch">
             <div class="score-bar-track">
-              <div class="score-bar-fill" [style.width]="org.fetched.profileMatch.score + '%'"></div>
+              <div class="score-bar-fill" [style.width]="(org.fetched.profileMatch?.score ?? 0) + '%'"></div>
             </div>
             <span class="score-val">{{ org.fetched?.profileMatch?.score }}%</span>
           </div>
