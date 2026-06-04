@@ -65,8 +65,8 @@ import { ResumeUploadComponent, ParsedProfile } from '../../shared/components/re
               <span class="iv-badge" [style.color]="getIvColor(job.interviewType)">{{ getIvIcon(job.interviewType) }} {{ job.interviewType }}</span>
             </div>
             <!-- Personalized tip -->
-            <div class="personalized-tip" *ngIf="profile() && job['personalizedTip']">
-              💡 {{ job['personalizedTip'] }}
+            <div class="personalized-tip" *ngIf="profile() && (job as any)['personalizedTip']">
+              💡 {{ (job as any)['personalizedTip'] }}
             </div>
           </div>
           <div class="score-bar-wrap">
