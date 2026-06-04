@@ -63,5 +63,5 @@ import { LOCATIONS, LocationKey } from '../../core/models';
 })
 export class NavbarComponent {
   locations = LOCATIONS;
-  constructor(public state: AppStateService) {}
+ readonly state = inject(AppStateService);
 }
