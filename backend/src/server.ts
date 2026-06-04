@@ -20,7 +20,20 @@ app.use(morgan(ENV.NODE_ENV === 'production' ? 'combined' : 'dev'));
 
 // ── CORS ──────────────────────────────────────────────────────────────────────
 app.use(cors({
-  origin:      ENV.CLIENT_ORIGIN,
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+    const allowed = [
+      ENV.CLIENT_ORIGIN,
+      /\.vercel\.app$/,
+      /^http:\/\/localhost/,
+    ];
+    const isAllowed = allowed.some(pattern =>
+      typeof pattern === 'string' ? pattern === origin : pattern.test(origin)
+    );
+    if (isAllowed) return callback(null, true);
+    callback(new Error('CORS: origin not allowed'));
+  },
   credentials: true,
   methods:     ['GET','POST','PUT','DELETE','OPTIONS'],
   allowedHeaders: ['Content-Type','Authorization'],
