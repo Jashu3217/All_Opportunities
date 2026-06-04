@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { MODULE_CONFIGS } from '../../core/models';
-import { AppStateService } from '../../core/services/app-state.service';
+import { MODULE_CONFIGS } from '../../../core/models';
+import { AppStateService } from '../../../core/services/app-state.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,13 +13,12 @@ import { AppStateService } from '../../core/services/app-state.service';
       <div class="sidebar-inner">
         <div class="sidebar-title">MODULES</div>
         <nav>
-          
-            *ngFor="let mod of modules"
-            class="nav-item"
-            [routerLink]="mod.route"
-            routerLinkActive="active"
-            [style.--mod-color]="mod.color"
-            [style.--mod-dim]="mod.dimColor">
+          <a *ngFor="let mod of modules"
+             class="nav-item"
+             [routerLink]="mod.route"
+             routerLinkActive="active"
+             [style.--mod-color]="mod.color"
+             [style.--mod-dim]="mod.dimColor">
             <span class="nav-icon">{{ mod.icon }}</span>
             <div class="nav-text">
               <span class="nav-label">{{ mod.label }}</span>
@@ -45,7 +44,7 @@ import { AppStateService } from '../../core/services/app-state.service';
     .sidebar-inner { width:220px; padding:16px 12px; display:flex; flex-direction:column; height:100%; }
     .sidebar-title { font-size:10px; color:#4a7098; letter-spacing:0.1em; font-family:'Space Mono',monospace; margin-bottom:12px; }
     .nav-item { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px; margin-bottom:4px; text-decoration:none; color:#8aafd4; transition:all 0.15s; border:1px solid transparent; }
-    .nav-item:hover { background:var(--mod-dim); color:#e8f4ff; border-color:var(--mod-color,#2a4f80); }
+    .nav-item:hover { background:var(--mod-dim); color:#e8f4ff; border-color:var(--mod-color, #2a4f80); }
     .nav-item.active { background:var(--mod-dim); border-color:var(--mod-color); color:var(--mod-color); }
     .nav-icon { font-size:18px; flex-shrink:0; }
     .nav-text { display:flex; flex-direction:column; }
