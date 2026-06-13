@@ -14,7 +14,7 @@ import { Component, inject } from '@angular/core';
         <div class="brand">
           <span class="live-dot"></span>
           <span class="brand-name">OpportunityOS</span>
-          <span class="version-badge">v1.0</span>
+          <span class="version-badge">v2.0</span>
           <span class="ai-badge">AI GOVT SCANNER</span>
         </div>
       </div>

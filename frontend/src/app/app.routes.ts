@@ -41,5 +41,6 @@ export const routes: Routes = [
     loadComponent: () => import('./modules/alerts/alerts.component').then(m => m.AlertsComponent),
     title: 'Job Alerts — OpportunityOS',
   },
+  // Catch-all - must be last
   { path: '**', redirectTo: 'sde' },
 ];
