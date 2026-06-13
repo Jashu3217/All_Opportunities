@@ -1,6 +1,6 @@
 // ─── All frontend models matching backend types ────────────────────────────────
 
-export type ModuleId = 'sde' | 'resume' | 'govt' | 'teach' | 'freelance';
+export type ModuleId = 'sde' | 'resume' | 'govt' | 'teach' | 'freelance' | 'tracker' | 'alerts';
 export type LocationKey = 'hyderabad' | 'remote' | 'bangalore' | 'pan_india' | 'global';
 export type GovtStatus = 'ACTIVE' | 'UPCOMING' | 'CLOSED_RECENTLY' | 'NO_CURRENT_NOTIFICATION' | 'ERROR';
 
