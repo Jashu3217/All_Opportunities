@@ -43,11 +43,13 @@ export interface ModuleConfig {
 }
 
 export const MODULE_CONFIGS: ModuleConfig[] = [
-  { id:'sde',      icon:'⚡', label:'SDE / SWE / SE Jobs',  shortLabel:'Tech Jobs',  color:'#00d4ff', dimColor:'rgba(0,212,255,0.1)',  badge:'LIVE',     desc:'SDE-2/SWE/SE roles with DSA+System Design breakdown',                 route:'/sde'      },
-  { id:'resume',   icon:'🔧', label:'Resume Stack Jobs',     shortLabel:'Stack Match',color:'#00e676', dimColor:'rgba(0,230,118,0.1)',  badge:'LIVE',     desc:'Node.js/MEAN/Redis roles matched to your resume',                     route:'/resume'   },
+  { id:'sde',      icon:'⚡', label:'SDE / SWE / SE Jobs',  shortLabel:'Tech Jobs',  color:'#00d4ff', dimColor:'rgba(0,212,255,0.1)',  badge:'AI LIVE',  desc:'AI scans real job boards live — only currently hiring roles',         route:'/sde'      },
+  { id:'resume',   icon:'🔧', label:'Resume Stack Jobs',     shortLabel:'Stack Match',color:'#00e676', dimColor:'rgba(0,230,118,0.1)',  badge:'AI LIVE',  desc:'AI finds live roles matching YOUR actual resume skills',               route:'/resume'   },
   { id:'govt',     icon:'🏛️', label:'Govt / PSU Jobs',      shortLabel:'Govt Jobs',  color:'#ffb800', dimColor:'rgba(255,184,0,0.1)',  badge:'AI LIVE',  desc:'AI reads official portals & PDFs — real vacancies and deadlines',     route:'/govt'     },
-  { id:'teach',    icon:'🎓', label:'DSA Teaching',          shortLabel:'Teaching',   color:'#7c4dff', dimColor:'rgba(124,77,255,0.1)', badge:'NEW',      desc:'Freelance DSA/Coding tutoring for global students',                   route:'/teach'    },
-  { id:'freelance',icon:'🌐', label:'Web Freelance',         shortLabel:'Freelance',  color:'#ff4081', dimColor:'rgba(255,64,129,0.1)', badge:'NEW',      desc:'MEAN/MERN freelance projects on global platforms',                    route:'/freelance'},
+  { id:'teach',    icon:'🎓', label:'DSA Teaching',          shortLabel:'Teaching',   color:'#7c4dff', dimColor:'rgba(124,77,255,0.1)', badge:'AI LIVE',  desc:'AI finds live tutoring gigs on Codementor, Upwork, Chegg globally',   route:'/teach'    },
+  { id:'freelance',icon:'🌐', label:'Web Freelance',         shortLabel:'Freelance',  color:'#ff4081', dimColor:'rgba(255,64,129,0.1)', badge:'AI LIVE',  desc:'AI scans Upwork, Toptal, Arc.dev for active MEAN/MERN projects',      route:'/freelance'},
+  { id:'tracker',  icon:'📋', label:'Application Tracker',  shortLabel:'Tracker',    color:'#f59e0b', dimColor:'rgba(245,158,11,0.1)', badge:'NEW',      desc:'Track all your applications — pipeline, interviews, offers',          route:'/tracker'  },
+  { id:'alerts',   icon:'🔔', label:'Job Alerts',            shortLabel:'Alerts',     color:'#a78bfa', dimColor:'rgba(167,139,250,0.1)',badge:'NEW',      desc:'Get daily live job digest to your email every morning at 9AM',        route:'/alerts'   },
 ];
 
 // ─── SDE Job ──────────────────────────────────────────────────────────────────

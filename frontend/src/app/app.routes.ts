@@ -31,5 +31,15 @@ export const routes: Routes = [
     data: { moduleId: 'freelance', title: 'Web Freelance', icon: '🌐' },
     title: 'Web Freelance — OpportunityOS',
   },
+  {
+    path: 'tracker',
+    loadComponent: () => import('./modules/tracker/tracker.component').then(m => m.TrackerComponent),
+    title: 'Application Tracker — OpportunityOS',
+  },
+  {
+    path: 'alerts',
+    loadComponent: () => import('./modules/alerts/alerts.component').then(m => m.AlertsComponent),
+    title: 'Job Alerts — OpportunityOS',
+  },
   { path: '**', redirectTo: 'sde' },
 ];

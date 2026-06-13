@@ -147,6 +147,11 @@ interface LiveJob {
                     [disabled]="loadingDoc() === 'ip_' + job.id">
               {{ loadingDoc() === 'ip_' + job.id ? '⏳' : '🎤' }} Interview Prep
             </button>
+          <button class="action-btn save-btn"
+                  (click)="saveToTracker(job)"
+                  [disabled]="savedJobs()[job.id]">
+            {{ savedJobs()[job.id] ? '✅ Saved' : '📋 Save to Tracker' }}
+          </button>
           </ng-container>
         </div>
       </div>
@@ -285,6 +290,7 @@ interface LiveJob {
     .cv-btn { color:#7c4dff; border-color:rgba(124,77,255,0.4); background:rgba(124,77,255,0.1); }
     .letter-btn { color:#ffb800; border-color:rgba(255,184,0,0.4); background:rgba(255,184,0,0.1); }
     .prep-btn { color:#00e676; border-color:rgba(0,230,118,0.4); background:rgba(0,230,118,0.1); }
+    .save-btn { color:#f59e0b; border-color:rgba(245,158,11,0.4); background:rgba(245,158,11,0.1); }
     /* Modal */
     .modal-overlay { position:fixed; inset:0; background:rgba(4,13,26,0.85); z-index:1000; display:flex; align-items:center; justify-content:center; padding:20px; }
     .modal-box { background:#071428; border:1px solid #2a4f80; border-radius:16px; width:100%; max-width:680px; max-height:85vh; display:flex; flex-direction:column; }
@@ -330,6 +336,7 @@ export class LiveJobsComponent implements OnInit {
   profile    = signal<ParsedProfile | null>(null);
   loadingDoc = signal<string>('');
   modalData  = signal<{ type: string; title: string; data: any } | null>(null);
+  savedJobs  = signal<Record<string, boolean>>({});
 
   private route = inject(ActivatedRoute);
   constructor(private http: HttpClient) {}
@@ -418,6 +425,28 @@ export class LiveJobsComponent implements OnInit {
         if (res.success) this.modalData.set({ type: 'ip', title: `🎤 Interview Prep — ${job.company}`, data: res.data });
       },
       error: () => this.loadingDoc.set(''),
+    });
+  }
+
+  saveToTracker(job: LiveJob) {
+    this.http.post<any>(`${environment.apiUrl}/tracker`, {
+      jobId:      job.id,
+      jobTitle:   job.title,
+      company:    job.company,
+      location:   job.location,
+      salary:     job.salary,
+      applyUrl:   job.applyUrl,
+      sourceUrl:  job.sourceUrl,
+      source:     job.source,
+      skills:     job.skills,
+      matchScore: job.matchScore,
+      moduleId:   this.moduleId,
+    }).subscribe({
+      next: (r) => {
+        this.savedJobs.update(s => ({ ...s, [job.id]: true }));
+        console.log('Saved:', r.message);
+      },
+      error: (e) => console.error('Save failed:', e),
     });
   }
 

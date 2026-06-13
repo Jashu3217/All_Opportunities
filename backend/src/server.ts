@@ -10,6 +10,7 @@ import { connectMongoDB } from './config/database';
 import { connectRedis } from './config/redis';
 import router from './routes';
 import { errorHandler, notFound } from './middleware/error.middleware';
+import { startAlertScheduler } from './controllers/alerts.controller';
 
 const app = express();
 
@@ -66,6 +67,8 @@ app.use(errorHandler);
 async function bootstrap() {
   await connectMongoDB();
   await connectRedis();
+
+  startAlertScheduler();
 
   app.listen(ENV.PORT, () => {
     console.log(`\n🚀 OpportunityOS API running on port ${ENV.PORT}`);
